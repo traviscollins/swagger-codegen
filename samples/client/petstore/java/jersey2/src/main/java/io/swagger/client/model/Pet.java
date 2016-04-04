@@ -7,13 +7,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.client.model.Category;
 import io.swagger.client.model.Tag;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
 
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-02-17T17:16:21.885+08:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-03-14T22:17:48.808+08:00")
 public class Pet   {
   
   private Long id = null;
@@ -50,7 +51,6 @@ public class Pet   {
     this.id = id;
     return this;
   }
-
   
   @ApiModelProperty(example = "null", value = "")
   @JsonProperty("id")
@@ -68,7 +68,6 @@ public class Pet   {
     this.category = category;
     return this;
   }
-
   
   @ApiModelProperty(example = "null", value = "")
   @JsonProperty("category")
@@ -86,7 +85,6 @@ public class Pet   {
     this.name = name;
     return this;
   }
-
   
   @ApiModelProperty(example = "doggie", required = true, value = "")
   @JsonProperty("name")
@@ -104,7 +102,6 @@ public class Pet   {
     this.photoUrls = photoUrls;
     return this;
   }
-
   
   @ApiModelProperty(example = "null", required = true, value = "")
   @JsonProperty("photoUrls")
@@ -122,7 +119,6 @@ public class Pet   {
     this.tags = tags;
     return this;
   }
-
   
   @ApiModelProperty(example = "null", value = "")
   @JsonProperty("tags")
@@ -141,7 +137,6 @@ public class Pet   {
     this.status = status;
     return this;
   }
-
   
   @ApiModelProperty(example = "null", value = "pet status in the store")
   @JsonProperty("status")

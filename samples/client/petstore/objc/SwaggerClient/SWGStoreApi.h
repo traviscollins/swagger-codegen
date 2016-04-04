@@ -21,6 +21,32 @@
 +(SWGStoreApi*) sharedAPI;
 ///
 ///
+/// Delete purchase order by ID
+/// For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
+///
+/// @param orderId ID of the order that needs to be deleted
+/// 
+///
+/// @return 
+-(NSNumber*) deleteOrderWithOrderId: (NSString*) orderId
+    completionHandler: (void (^)(NSError* error)) handler;
+
+
+///
+///
+/// Finds orders by status
+/// A single status value can be provided as a string
+///
+/// @param status Status value that needs to be considered for query
+/// 
+///
+/// @return NSArray<SWGOrder>*
+-(NSNumber*) findOrdersByStatusWithStatus: (NSString*) status
+    completionHandler: (void (^)(NSArray<SWGOrder>* output, NSError* error)) handler;
+
+
+///
+///
 /// Returns pet inventories by status
 /// Returns a map of status codes to quantities
 ///
@@ -33,15 +59,14 @@
 
 ///
 ///
-/// Place an order for a pet
+/// Fake endpoint to test arbitrary object return by 'Get inventory'
+/// Returns an arbitrary object which is actually a map of status codes to quantities
+///
 /// 
 ///
-/// @param body order placed for purchasing the pet
-/// 
-///
-/// @return SWGOrder*
--(NSNumber*) placeOrderWithBody: (SWGOrder*) body
-    completionHandler: (void (^)(SWGOrder* output, NSError* error)) handler;
+/// @return NSObject*
+-(NSNumber*) getInventoryInObjectWithCompletionHandler: 
+    (void (^)(NSObject* output, NSError* error)) handler;
 
 
 ///
@@ -59,15 +84,15 @@
 
 ///
 ///
-/// Delete purchase order by ID
-/// For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
-///
-/// @param orderId ID of the order that needs to be deleted
+/// Place an order for a pet
 /// 
 ///
-/// @return 
--(NSNumber*) deleteOrderWithOrderId: (NSString*) orderId
-    completionHandler: (void (^)(NSError* error)) handler;
+/// @param body order placed for purchasing the pet
+/// 
+///
+/// @return SWGOrder*
+-(NSNumber*) placeOrderWithBody: (SWGOrder*) body
+    completionHandler: (void (^)(SWGOrder* output, NSError* error)) handler;
 
 
 

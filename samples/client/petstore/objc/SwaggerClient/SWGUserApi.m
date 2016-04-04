@@ -72,7 +72,7 @@ static SWGUserApi* singletonAPI = nil;
 ///
 /// Create user
 /// This can only be done by the logged in user.
-///  @param body Created user object
+///  @param body Created user object (optional)
 ///
 ///  @returns void
 ///
@@ -120,7 +120,7 @@ static SWGUserApi* singletonAPI = nil;
 
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
     
     bodyParam = body;
     
@@ -131,7 +131,7 @@ static SWGUserApi* singletonAPI = nil;
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams
-                                     files: files
+                                     files: localVarFiles
                                       body: bodyParam
                               headerParams: headerParams
                               authSettings: authSettings
@@ -147,7 +147,7 @@ static SWGUserApi* singletonAPI = nil;
 ///
 /// Creates list of users with given input array
 /// 
-///  @param body List of user object
+///  @param body List of user object (optional)
 ///
 ///  @returns void
 ///
@@ -195,7 +195,7 @@ static SWGUserApi* singletonAPI = nil;
 
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
     
     bodyParam = body;
     
@@ -206,7 +206,7 @@ static SWGUserApi* singletonAPI = nil;
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams
-                                     files: files
+                                     files: localVarFiles
                                       body: bodyParam
                               headerParams: headerParams
                               authSettings: authSettings
@@ -222,7 +222,7 @@ static SWGUserApi* singletonAPI = nil;
 ///
 /// Creates list of users with given input array
 /// 
-///  @param body List of user object
+///  @param body List of user object (optional)
 ///
 ///  @returns void
 ///
@@ -270,7 +270,7 @@ static SWGUserApi* singletonAPI = nil;
 
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
     
     bodyParam = body;
     
@@ -281,7 +281,7 @@ static SWGUserApi* singletonAPI = nil;
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams
-                                     files: files
+                                     files: localVarFiles
                                       body: bodyParam
                               headerParams: headerParams
                               authSettings: authSettings
@@ -295,11 +295,177 @@ static SWGUserApi* singletonAPI = nil;
 }
 
 ///
+/// Delete user
+/// This can only be done by the logged in user.
+///  @param username The name that needs to be deleted 
+///
+///  @returns void
+///
+-(NSNumber*) deleteUserWithUsername: (NSString*) username
+    completionHandler: (void (^)(NSError* error)) handler {
+
+    
+    // verify the required parameter 'username' is set
+    if (username == nil) {
+        [NSException raise:@"Invalid parameter" format:@"Missing the required parameter `username` when calling `deleteUser`"];
+    }
+    
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/user/{username}"];
+
+    // remove format in URL if needed
+    if ([resourcePath rangeOfString:@".{format}"].location != NSNotFound) {
+        [resourcePath replaceCharactersInRange: [resourcePath rangeOfString:@".{format}"] withString:@".json"];
+    }
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (username != nil) {
+        pathParams[@"username"] = username;
+    }
+    
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.defaultHeaders];
+
+    
+
+    // HTTP header `Accept`
+    headerParams[@"Accept"] = [SWGApiClient selectHeaderAccept:@[@"application/json", @"application/xml"]];
+    if ([headerParams[@"Accept"] length] == 0) {
+        [headerParams removeObjectForKey:@"Accept"];
+    }
+
+    // response content type
+    NSString *responseContentType;
+    if ([headerParams objectForKey:@"Accept"]) {
+        responseContentType = [headerParams[@"Accept"] componentsSeparatedByString:@", "][0];
+    }
+    else {
+        responseContentType = @"";
+    }
+
+    // request content type
+    NSString *requestContentType = [SWGApiClient selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"test_http_basic"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    
+    
+    
+
+    
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"DELETE"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: nil
+                           completionBlock: ^(id data, NSError *error) {
+                               handler(error);
+                           }
+          ];
+}
+
+///
+/// Get user by user name
+/// 
+///  @param username The name that needs to be fetched. Use user1 for testing. 
+///
+///  @returns SWGUser*
+///
+-(NSNumber*) getUserByNameWithUsername: (NSString*) username
+    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler {
+
+    
+    // verify the required parameter 'username' is set
+    if (username == nil) {
+        [NSException raise:@"Invalid parameter" format:@"Missing the required parameter `username` when calling `getUserByName`"];
+    }
+    
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/user/{username}"];
+
+    // remove format in URL if needed
+    if ([resourcePath rangeOfString:@".{format}"].location != NSNotFound) {
+        [resourcePath replaceCharactersInRange: [resourcePath rangeOfString:@".{format}"] withString:@".json"];
+    }
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (username != nil) {
+        pathParams[@"username"] = username;
+    }
+    
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.defaultHeaders];
+
+    
+
+    // HTTP header `Accept`
+    headerParams[@"Accept"] = [SWGApiClient selectHeaderAccept:@[@"application/json", @"application/xml"]];
+    if ([headerParams[@"Accept"] length] == 0) {
+        [headerParams removeObjectForKey:@"Accept"];
+    }
+
+    // response content type
+    NSString *responseContentType;
+    if ([headerParams objectForKey:@"Accept"]) {
+        responseContentType = [headerParams[@"Accept"] componentsSeparatedByString:@", "][0];
+    }
+    else {
+        responseContentType = @"";
+    }
+
+    // request content type
+    NSString *requestContentType = [SWGApiClient selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    
+    
+    
+
+    
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"SWGUser*"
+                           completionBlock: ^(id data, NSError *error) {
+                               handler((SWGUser*)data, error);
+                           }
+          ];
+}
+
+///
 /// Logs user into the system
 /// 
-///  @param username The user name for login
+///  @param username The user name for login (optional)
 ///
-///  @param password The password for login in clear text
+///  @param password The password for login in clear text (optional)
 ///
 ///  @returns NSString*
 ///
@@ -356,7 +522,7 @@ static SWGUserApi* singletonAPI = nil;
 
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
     
     
     
@@ -367,7 +533,7 @@ static SWGUserApi* singletonAPI = nil;
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams
-                                     files: files
+                                     files: localVarFiles
                                       body: bodyParam
                               headerParams: headerParams
                               authSettings: authSettings
@@ -429,7 +595,7 @@ static SWGUserApi* singletonAPI = nil;
 
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
     
     
     
@@ -440,7 +606,7 @@ static SWGUserApi* singletonAPI = nil;
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams
-                                     files: files
+                                     files: localVarFiles
                                       body: bodyParam
                               headerParams: headerParams
                               authSettings: authSettings
@@ -454,94 +620,11 @@ static SWGUserApi* singletonAPI = nil;
 }
 
 ///
-/// Get user by user name
-/// 
-///  @param username The name that needs to be fetched. Use user1 for testing.
-///
-///  @returns SWGUser*
-///
--(NSNumber*) getUserByNameWithUsername: (NSString*) username
-    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler {
-
-    
-    // verify the required parameter 'username' is set
-    if (username == nil) {
-        [NSException raise:@"Invalid parameter" format:@"Missing the required parameter `username` when calling `getUserByName`"];
-    }
-    
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/user/{username}"];
-
-    // remove format in URL if needed
-    if ([resourcePath rangeOfString:@".{format}"].location != NSNotFound) {
-        [resourcePath replaceCharactersInRange: [resourcePath rangeOfString:@".{format}"] withString:@".json"];
-    }
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (username != nil) {
-        pathParams[@"username"] = username;
-    }
-    
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.defaultHeaders];
-
-    
-
-    // HTTP header `Accept`
-    headerParams[@"Accept"] = [SWGApiClient selectHeaderAccept:@[@"application/json", @"application/xml"]];
-    if ([headerParams[@"Accept"] length] == 0) {
-        [headerParams removeObjectForKey:@"Accept"];
-    }
-
-    // response content type
-    NSString *responseContentType;
-    if ([headerParams objectForKey:@"Accept"]) {
-        responseContentType = [headerParams[@"Accept"] componentsSeparatedByString:@", "][0];
-    }
-    else {
-        responseContentType = @"";
-    }
-
-    // request content type
-    NSString *requestContentType = [SWGApiClient selectHeaderContentType:@[]];
-
-    // Authentication setting
-    NSArray *authSettings = @[];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
-    
-    
-    
-
-    
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"GET"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: files
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"SWGUser*"
-                           completionBlock: ^(id data, NSError *error) {
-                               handler((SWGUser*)data, error);
-                           }
-          ];
-}
-
-///
 /// Updated user
 /// This can only be done by the logged in user.
-///  @param username name that need to be deleted
+///  @param username name that need to be deleted 
 ///
-///  @param body Updated user object
+///  @param body Updated user object (optional)
 ///
 ///  @returns void
 ///
@@ -598,7 +681,7 @@ static SWGUserApi* singletonAPI = nil;
 
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
     
     bodyParam = body;
     
@@ -609,90 +692,7 @@ static SWGUserApi* singletonAPI = nil;
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams
-                                     files: files
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: nil
-                           completionBlock: ^(id data, NSError *error) {
-                               handler(error);
-                           }
-          ];
-}
-
-///
-/// Delete user
-/// This can only be done by the logged in user.
-///  @param username The name that needs to be deleted
-///
-///  @returns void
-///
--(NSNumber*) deleteUserWithUsername: (NSString*) username
-    completionHandler: (void (^)(NSError* error)) handler {
-
-    
-    // verify the required parameter 'username' is set
-    if (username == nil) {
-        [NSException raise:@"Invalid parameter" format:@"Missing the required parameter `username` when calling `deleteUser`"];
-    }
-    
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/user/{username}"];
-
-    // remove format in URL if needed
-    if ([resourcePath rangeOfString:@".{format}"].location != NSNotFound) {
-        [resourcePath replaceCharactersInRange: [resourcePath rangeOfString:@".{format}"] withString:@".json"];
-    }
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (username != nil) {
-        pathParams[@"username"] = username;
-    }
-    
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.defaultHeaders];
-
-    
-
-    // HTTP header `Accept`
-    headerParams[@"Accept"] = [SWGApiClient selectHeaderAccept:@[@"application/json", @"application/xml"]];
-    if ([headerParams[@"Accept"] length] == 0) {
-        [headerParams removeObjectForKey:@"Accept"];
-    }
-
-    // response content type
-    NSString *responseContentType;
-    if ([headerParams objectForKey:@"Accept"]) {
-        responseContentType = [headerParams[@"Accept"] componentsSeparatedByString:@", "][0];
-    }
-    else {
-        responseContentType = @"";
-    }
-
-    // request content type
-    NSString *requestContentType = [SWGApiClient selectHeaderContentType:@[]];
-
-    // Authentication setting
-    NSArray *authSettings = @[];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
-    
-    
-    
-
-    
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"DELETE"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: files
+                                     files: localVarFiles
                                       body: bodyParam
                               headerParams: headerParams
                               authSettings: authSettings

@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-public class JavaInflectorServerCodegen extends JavaClientCodegen implements CodegenConfig {
+public class JavaInflectorServerCodegen extends JavaClientCodegen {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JavaInflectorServerCodegen.class);
 
@@ -81,21 +81,6 @@ public class JavaInflectorServerCodegen extends JavaClientCodegen implements Cod
         );
         supportingFiles.add(new SupportingFile("StringUtil.mustache",
                 (sourceFolder + '/' + invokerPackage).replace(".", "/"), "StringUtil.java"));
-    }
-
-    @Override
-    public String getTypeDeclaration(Property p) {
-        if (p instanceof ArrayProperty) {
-            ArrayProperty ap = (ArrayProperty) p;
-            Property inner = ap.getItems();
-            return getSwaggerType(p) + "<" + getTypeDeclaration(inner) + ">";
-        } else if (p instanceof MapProperty) {
-            MapProperty mp = (MapProperty) p;
-            Property inner = mp.getAdditionalProperties();
-
-            return getTypeDeclaration(inner);
-        }
-        return super.getTypeDeclaration(p);
     }
 
     @Override

@@ -53,6 +53,10 @@ static void (^reachabilityChangeBlock)(int);
     cacheEnabled = enabled;
 }
 
++(void) setReachabilityStatus:(AFNetworkReachabilityStatus)status {
+    reachabilityStatus = status;
+}
+
 - (void)setHeaderValue:(NSString*) value
                 forKey:(NSString*) forKey {
     [self.requestSerializer setValue:value forHTTPHeaderField:forKey];
@@ -136,7 +140,8 @@ static void (^reachabilityChangeBlock)(int);
     NSMutableArray *lowerAccepts = [[NSMutableArray alloc] initWithCapacity:[accepts count]];
     for (NSString *string in accepts) {
         NSString * lowerAccept = [string lowercaseString];
-        if ([lowerAccept containsString:@"application/json"]) {
+	// use rangeOfString instead of containsString for iOS 7 support
+	if ([lowerAccept rangeOfString:@"application/json"].location != NSNotFound) {
             return @"application/json";
         }
         [lowerAccepts addObject:lowerAccept];
@@ -235,6 +240,10 @@ static void (^reachabilityChangeBlock)(int);
 
 +(AFNetworkReachabilityStatus) getReachabilityStatus {
     return reachabilityStatus;
+}
+
++(bool) getOfflineState {
+    return offlineState;
 }
 
 +(void) setReachabilityChangeBlock:(void(^)(int))changeBlock {
